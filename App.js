@@ -1,85 +1,57 @@
 // useState to use States from React library
 // StyleSheet to use the CSS emulator 
-// TextInput for text input fields
-// READ ABOUT ALL THE PROPS FOR INPUT FIELDS HERE https://reactnative.dev/docs/textinput
+// ScrollView a wrapper that allows scrolling inside 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
 
-  const [name, setName] = useState('unknown');
-  const [age, setAge] = useState('unknown');
+  const [sensors, setSensor] = useState([
+    {name: 'Sensor1', key: 1},
+    {name: 'Sensor2', key: 2},
+    {name: 'Sensor3', key: 3},
+    {name: 'Sensor4', key: 4},
+    {name: 'Sensor5', key: 5},
+    {name: 'Sensor6', key: 6},
+  ]);
 
+  // map cycles through an array in JS
+  // return a text component for each elem in array for example
+  // in general, return a JSX template
+  // That dynamic code yaaay
+  // put it in curly braces
 
   return (
-    // View is a div
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>
-          Hi App
-        </Text>
-      </View>
-      <View style={styles.body}>
-        <Text style={styles.headerText}>Enter name</Text>
-        {/* Stack props */}
-        <TextInput 
-          style={styles.input}
-          placeholder='e.g. John Tyler'
-          onChangeText={input => setName(input)}/>
-        
-        <Text style={styles.headerText}>Enter age</Text>
-        {/* Stack props */}
-        <TextInput 
-          keyboardType='numeric'
-          style={styles.input}
-          placeholder='e.g. 99'
-          onChangeText={input => setAge(input)}/>
-        
-        <Text style={styles.headerText}>Describe your life</Text>
-        {/* Stack props */}
-        <TextInput 
-          multiline
-          style={styles.input}
-          placeholder='e.g. When I was a kid ...'/>
-        
-        <Text>
-          Your name is {name} and your age is {age}
-        </Text>
-      </View>
+      
+    <ScrollView>
+    {sensors.map(item => {
+
+      return (
+        <View key={item.key}>
+          <Text style={styles.item}>{item.name}</Text>
+        </View>
+      )
+    })}
+    </ScrollView>
+
     </View>
   );
 }
 
-// Define CSS in styles
 const styles = StyleSheet.create({
-  // each of these is an object
   container: {
     flex: 1,
     backgroundColor: 'ghostwhite',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    paddingTop: 40,
+    paddingHorizontal: 20,
   },
-  header: {
-    backgroundColor: 'pink',
-    padding: 20,
-  },
-  headerText: {
-    fontWeight: 'bold',
-  },
-  body: {
-    backgroundColor: 'honeydew',
-    padding: 20,
-    borderColor: 'black',
-    borderWidth: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input:{
-    // By default it does not have border
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200,
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'plum',
+    fontSize: 24,
   },
 });
