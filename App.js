@@ -1,22 +1,15 @@
 // useState to use States from React library
-// Sty;eSheet to use the CSS emulator 
+// StyleSheet to use the CSS emulator 
+// TextInput for text input fields
+// READ ABOUT ALL THE PROPS FOR INPUT FIELDS HERE https://reactnative.dev/docs/textinput
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, PickerIOSComponent, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 export default function App() {
 
-  // Define a state and its update function in brackets
-  // useState hook, it gives the value to the state
-  const [name, setName] = useState('Client');
-  // Instead of a string, make an object  state
-  const [person, setPerson] = useState({name: 'John', age: '27'});
+  const [name, setName] = useState('unknown');
+  const [age, setAge] = useState('unknown');
 
-  // Handler is a convention in React
-  const clickHandler = () => {
-    // update the name state
-    setName('New Client');
-    setPerson({name: 'Spurion', age: '23'})
-  }
 
   return (
     // View is a div
@@ -27,19 +20,31 @@ export default function App() {
         </Text>
       </View>
       <View style={styles.body}>
+        <Text style={styles.headerText}>Enter name</Text>
+        {/* Stack props */}
+        <TextInput 
+          style={styles.input}
+          placeholder='e.g. John Tyler'
+          onChangeText={input => setName(input)}/>
+        
+        <Text style={styles.headerText}>Enter age</Text>
+        {/* Stack props */}
+        <TextInput 
+          keyboardType='numeric'
+          style={styles.input}
+          placeholder='e.g. 99'
+          onChangeText={input => setAge(input)}/>
+        
+        <Text style={styles.headerText}>Describe your life</Text>
+        {/* Stack props */}
+        <TextInput 
+          multiline
+          style={styles.input}
+          placeholder='e.g. When I was a kid ...'/>
+        
         <Text>
-          Your name: {name}
+          Your name is {name} and your age is {age}
         </Text>
-        <Text>
-          His name is {person.name} and his age is {person.age}
-        </Text>
-      </View>
-      <View style={styles.button}>
-        {/* Button is a self closing tag in React native
-        // So we use props to specify what text is gonna be in the button
-        // A prop is title 
-        // Another one is the onPress prop */}
-        <Button title='update name' onPress={clickHandler}/>
       </View>
     </View>
   );
@@ -66,8 +71,15 @@ const styles = StyleSheet.create({
     padding: 20,
     borderColor: 'black',
     borderWidth: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  button: {
-    marginTop: 20,
+  input:{
+    // By default it does not have border
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
 });
