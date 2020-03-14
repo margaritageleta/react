@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <View style={styles.header}>
             <Text style={styles.title}>
-                My Todos
+                Sensores
             </Text>
         </View>
     )

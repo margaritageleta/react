@@ -1,16 +1,16 @@
-// useState to use States from React library
-// StyleSheet to use the CSS emulator 
-// ScrollView a wrapper that allows scrolling inside 
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import Header from './components/header';
+import { SensorItem, SensorAddItem} from './components/sensorItem';
 
 export default function App() {
-  const [todos, setTodos] = useState([
-    {text: 'buy tea', key: '1'},
-    {text: 'create an app', key: '2'},
-    {text: 'play videogames',  key: '3'},
+
+  const [sensors, setSensors] = useState([
+    {name: 'Sensor 1', key: '1'},
+    {name: 'Sensor 2', key: '2'},
+    {name: 'Sensor 3', key: '3'},
   ]);
+
 
   return (
     <View style={styles.container}>
@@ -20,11 +20,12 @@ export default function App() {
         {/*TO DO FORM*/}
         <View style={styles.list}>
           <FlatList
-            data={todos}
+            data={sensors}
             renderItem={({ item }) => (
-              <Text>{item.text}</Text>
+              <SensorItem data={item}/>
             )}
           />
+          <SensorAddItem data={{ name: '+ Añadir sensor'}}/>
         </View>
       </View>
     </View>
@@ -39,8 +40,7 @@ const styles = StyleSheet.create({
   content: {
     marginTop: 24,
     padding: 30,
-    backgroundColor: 'gold',
-    fontSize: 24,
+    backgroundColor: 'transparent',
     marginHorizontal: 10,
   },
   list: {
