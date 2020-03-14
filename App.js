@@ -2,7 +2,7 @@
 // StyleSheet to use the CSS emulator 
 // ScrollView a wrapper that allows scrolling inside 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 export default function App() {
 
@@ -15,39 +15,28 @@ export default function App() {
     {name: 'Sensor6', key: '6'},
   ]);
 
-  // map cycles through an array in JS
-  // return a text component for each elem in array for example
-  // in general, return a JSX template
-  // That dynamic code yaaay
-  // put it in curly braces
+  const pressHandler = (id) => {
+    console.log(id);
+    // function that returns the new state or the current state
+    // This is much safer
+    setSensor((prevSensors) => {
+      return prevSensors.filter(sensor => sensor.key != id)
+    })
+  }
 
   return (
     <View style={styles.container}>
       
-    {/* <ScrollView>
-    {sensors.map(item => {
-
-      return (
-        <View key={item.key}>
-          <Text style={styles.item}>{item.name}</Text>
-        </View>
-      )
-    })}
-    </ScrollView> */}
-    
-    {/*Data prop defines the data we are going to cycle through
-      renderItem prop returns some JSX
-      Data must have a key property and FlatList looks for key automatically
-      Keys must be strings
-      Flatlist does not load everything at once, like map + scrollview
-      numColumns prop useful
-    */}
       <FlatList 
         numColumns={2}
         data={sensors}
         renderItem={({ item }) => {
           return (
-            <Text style={styles.item}>{item.name}</Text>
+            // Everythin is inside this tag is touchable
+            // Add an onPress handler
+            <TouchableOpacity onPress={() => pressHandler(item.key)}>
+              <Text style={styles.item}>{item.name}</Text>
+            </TouchableOpacity>
           )
         }}
       />
